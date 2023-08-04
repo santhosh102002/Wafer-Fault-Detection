@@ -6,6 +6,8 @@ from src.logger import logging
 import sys
 from src.utils import export_collection_as_dataframe
 from sklearn.model_selection import train_test_split
+from dotenv import load_dotenv
+load_dotenv()
 
 @dataclass
 class DataIngestionConfig:
@@ -20,8 +22,8 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info('Data Ingestion started')
         try:
-            df : pd.DataFrame = export_collection_as_dataframe( "waferDB",
-                                          "WaferCollection")
+            df : pd.DataFrame = export_collection_as_dataframe( os.getenv("WAFER_DB"),
+                                          os.getenv("WAFER_COLLECTION"))
             logging.info('Exported collection as dataframe')
 
             os.makedirs(os.path.dirname(self.data_ingestion_config.train_data_path),exist_ok=True)

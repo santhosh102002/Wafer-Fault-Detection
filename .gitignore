@@ -4,4 +4,5 @@ dist
 env
 src.egg-info
 demo.py
+.env
 

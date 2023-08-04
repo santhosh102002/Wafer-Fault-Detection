@@ -19,18 +19,28 @@ class DataTransformation:
     def __init__(self):
         self.data_transformation_config = DataTransformationConfig()
     def data_transformation_obj(self):
+        try:
+            
+            # define custom function to replace 'NA' with np.nan
+            replace_na_with_nan = lambda X: np.where(X == 'na', np.nan, X)
 
-        replace_na_with_nan = lambda X: np.where(X=='na',np.nan,X)
-        nan_replacement_step = ('nan_replacement',FunctionTransformer(replace_na_with_nan))
-        simple_imputer_step = ('simple_imputer',SimpleImputer(strategy='constant',fill_value=0))
-        scaler_step = ('scaler',RobustScaler())
+            # define the steps for the preprocessor pipeline
+            nan_replacement_step = ('nan_replacement', FunctionTransformer(replace_na_with_nan))
+            imputer_step = ('imputer', SimpleImputer(strategy='constant', fill_value=0))
+            scaler_step = ('scaler', RobustScaler())
 
-        preprocessor = Pipeline(steps=[
-            nan_replacement_step,
-            simple_imputer_step,
-            scaler_step
-        ])
-        return preprocessor
+            preprocessor = Pipeline(
+                steps=[
+                nan_replacement_step,
+                imputer_step,
+                scaler_step
+                ]
+            )
+            
+            return preprocessor
+
+        except Exception as e:
+            raise CustomException(e, sys)
     def initiate_data_transformation(self,train_path,test_path):
 
         try:

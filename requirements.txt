@@ -7,3 +7,4 @@ ipykernel
 pymongo
 imbalanced-learn
 dill
+python-dotenv

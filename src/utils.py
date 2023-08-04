@@ -5,15 +5,14 @@ import numpy as np
 # import boto3
 from src.exception import CustomException
 import dill
+from dotenv import load_dotenv
+load_dotenv()
 
 
-DATABASE = "waferDB"
-COLLECTION = "WaferCollection"
 
-url = "mongodb+srv://santhoshNode:santhoshNode@cluster0.ofceqbd.mongodb.net/"
 def export_collection_as_dataframe(db_name,collection_name):
     try:
-        client = MongoClient(url)
+        client = MongoClient(os.getenv("MONGO_URL"))
         collection = client[db_name][collection_name]
         df = pd.DataFrame(list(collection.find()))
         # print(list(df.find()))
