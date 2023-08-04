@@ -5,3 +5,5 @@ seaborn
 scikit-learn
 ipykernel
 pymongo
+imbalanced-learn
+dill

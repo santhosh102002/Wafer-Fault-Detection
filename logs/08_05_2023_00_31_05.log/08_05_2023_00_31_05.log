@@ -1,0 +1,4 @@
+[ 2023-08-05 00:31:07,940 ] 21 root - INFO - Data Ingestion started
+[ 2023-08-05 00:31:13,519 ] 25 root - INFO - Exported collection as dataframe
+[ 2023-08-05 00:31:13,739 ] 32 root - INFO - The dataingested from mongodb to artifacts\raw.csv
+[ 2023-08-05 00:31:13,740 ] 34 root - INFO - Exited initiate_data_ingestion method of DataIngestion class
