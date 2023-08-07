@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from src.exception import CustomException
 from src.logger import logging
 import sys
-from src.utils import export_collection_as_dataframe
+from src.utils.main_utils import MainUtils
 from sklearn.model_selection import train_test_split
 from dotenv import load_dotenv
 load_dotenv()
@@ -22,7 +22,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info('Data Ingestion started')
         try:
-            df : pd.DataFrame = export_collection_as_dataframe( os.getenv("WAFER_DB"),
+            df : pd.DataFrame = MainUtils.export_collection_as_dataframe( os.getenv("WAFER_DB"),
                                           os.getenv("WAFER_COLLECTION"))
             logging.info('Exported collection as dataframe')
 

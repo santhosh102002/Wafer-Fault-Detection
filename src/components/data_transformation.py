@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 from imblearn.combine import SMOTETomek
 from imblearn.over_sampling import SMOTE
-from src.utils import save_obj
+from src.utils.main_utils import MainUtils
 from src.exception import CustomException
 from sklearn.model_selection import train_test_split
 
@@ -54,7 +54,7 @@ class DataTransformation:
             pipeline = self.data_transformation_obj()
 
             target_column_name = "Good/Bad"
-            target_column_mapping = {-1.0: 1, 1.0: 0}
+            target_column_mapping = {-1.0: 0, 1.0: 1}
 
             #training dataframe
             input_feature_train_df = train_df.drop(columns=[target_column_name],axis=1)
@@ -92,7 +92,7 @@ class DataTransformation:
             train_arr = np.c_[input_feature_train_final, np.array(target_feature_train_final) ]
             test_arr = np.c_[ input_feature_test_final, np.array(target_feature_test_final) ]
 
-            save_obj(self.data_transformation_config.preprocessor_obj_file_path,
+            MainUtils.save_object(self.data_transformation_config.preprocessor_obj_file_path,
                         obj= preprocessor)
         
             

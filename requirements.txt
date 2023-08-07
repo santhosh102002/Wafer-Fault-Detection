@@ -9,3 +9,4 @@ imbalanced-learn
 dill
 python-dotenv
 xgboost
+pyyaml

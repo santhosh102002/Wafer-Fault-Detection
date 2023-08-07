@@ -15,7 +15,7 @@ from xgboost import XGBClassifier
 # from src.constant import *
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import evaluate_models, load_object, save_obj  #, upload_file
+from src.utils.main_utils import MainUtils#evaluate_models, load_object, save_obj  #, upload_file
 
 
 @dataclass
@@ -23,22 +23,22 @@ class ModelTrainerConfig:
     trained_model_file_path = os.path.join("artifacts", "model.pkl")
 
 
-class CustomModel:
-    def __init__(self, preprocessing_object, trained_model_object):
-        self.preprocessing_object = preprocessing_object
+# class CustomModel:
+#     def __init__(self, preprocessing_object, trained_model_object):
+#         self.preprocessing_object = preprocessing_object
 
-        self.trained_model_object = trained_model_object
+#         self.trained_model_object = trained_model_object
 
-    def predict(self, X):
-        transformed_feature = self.preprocessing_object.transform(X)
+#     def predict(self, X):
+#         transformed_feature = self.preprocessing_object.transform(X)
 
-        return self.trained_model_object.predict(transformed_feature)
+#         return self.trained_model_object.predict(transformed_feature)
 
-    def __repr__(self):
-        return f"{type(self.trained_model_object).__name__}()"
+#     def __repr__(self):
+#         return f"{type(self.trained_model_object).__name__}()"
 
-    def __str__(self):
-        return f"{type(self.trained_model_object).__name__}()"
+#     def __str__(self):
+#         return f"{type(self.trained_model_object).__name__}()"
 
 
 class ModelTrainer:
@@ -67,18 +67,18 @@ class ModelTrainer:
 
             logging.info(f"Extracting model config file path")
 
-            model_report: dict = evaluate_models(X=x_train, y=y_train, models=models)
+            model_report: dict = MainUtils.evaluate_models(X=x_train, y=y_train, models=models)
 
             ## To get best model score from dict
             best_model_score = max(sorted(model_report.values()))
-            print(best_model_score)
+            # print(best_model_score)
 
             ## To get best model name from dict
 
             best_model_name = list(model_report.keys())[
                 list(model_report.values()).index(best_model_score)
             ]
-            print(best_model_name)
+            # print(best_model_name)
 
             best_model = models[best_model_name]
 
@@ -87,26 +87,28 @@ class ModelTrainer:
 
             logging.info(f"Best found model on both training and testing dataset")
 
-            preprocessing_obj = load_object(file_path=preprocessor_path)
 
-            custom_model = CustomModel(
-                preprocessing_object=preprocessing_obj,
-                trained_model_object=best_model,
-            )
+            # preprocessing_obj = MainUtils.load_object(file_path=preprocessor_path)
+            model = best_model.fit(x_train,y_train)
+
+            # custom_model = CustomModel(
+            #     preprocessing_object=preprocessing_obj,
+            #     trained_model_object=model,
+            # )
 
             logging.info(
                 f"Saving model at path: {self.model_trainer_config.trained_model_file_path}"
             )
 
-            save_obj(
+            MainUtils.save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,
-                obj=custom_model,
+                obj=  model #custom_model,
             )
 
-            predicted = best_model.predict(x_test)
+            predicted = model.predict(x_test)
 
             accuracy = accuracy_score(y_test, predicted)
-            print(accuracy)
+            # print(accuracy)
 
             # upload_file(
             #     from_filename=self.model_trainer_config.trained_model_file_path,
