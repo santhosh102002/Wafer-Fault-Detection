@@ -8,3 +8,4 @@ pymongo
 imbalanced-learn
 dill
 python-dotenv
+xgboost
