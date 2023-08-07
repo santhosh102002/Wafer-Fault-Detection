@@ -2,6 +2,7 @@ artifacts
 build
 dist
 env
+logs
 src.egg-info
 demo.py
 .env

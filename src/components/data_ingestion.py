@@ -26,15 +26,16 @@ class DataIngestion:
                                           os.getenv("WAFER_COLLECTION"))
             logging.info('Exported collection as dataframe')
 
-            os.makedirs(os.path.dirname(self.data_ingestion_config.train_data_path),exist_ok=True)
+            os.makedirs(os.path.dirname(self.data_ingestion_config.raw_data_path),exist_ok=True)
             df.to_csv(self.data_ingestion_config.raw_data_path,index=False,header=True)
-            train_set,test_set = train_test_split(df,test_size=0.20,random_state=42)
+            train_set,test_set = train_test_split(df,test_size=0.20,random_state=50)
             train_set.to_csv(self.data_ingestion_config.train_data_path,index = False,header=True)
             test_set.to_csv(self.data_ingestion_config.test_data_path,index=False,header=True)
             logging.info(f'The dataingested from mongodb to {self.data_ingestion_config.raw_data_path}')
 
             logging.info('Exited initiate_data_ingestion method of DataIngestion class')
             return(
+               
                 self.data_ingestion_config.train_data_path,
                 self.data_ingestion_config.test_data_path
             )
