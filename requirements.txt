@@ -1,12 +1,15 @@
-flask
+Flask==2.2.3
 numpy 
 pandas 
 seaborn 
 scikit-learn
 ipykernel
-pymongo
-imbalanced-learn
-dill
-python-dotenv
-xgboost
+seaborn==0.12.2
+pymongo==4.2.0
+imblearn==0.0
+dill==0.3.5.1
+python-dotenv==0.21.0
+xgboost==1.6.2
 pyyaml
+
+ -e .
