@@ -6,3 +6,8 @@ notebooks/
 env/
 LICENSE
 README.md
+build/
+test/
+upload_to_db/
+demo.py
+

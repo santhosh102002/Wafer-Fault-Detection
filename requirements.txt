@@ -1,15 +1,15 @@
-Flask==2.2.3
-numpy 
-pandas 
-seaborn 
-scikit-learn
-ipykernel
-seaborn==0.12.2
-pymongo==4.2.0
-imblearn==0.0
+blinker==1.6.2
 dill==0.3.5.1
+dnspython==2.4.1
+flask==2.2.3
+imblearn==0.0
+ipykernel==6.25.1
+pymongo==4.2.0
 python-dotenv==0.21.0
+pyyaml==6.0.1
+requests==2.31.0
+seaborn==0.12.2
+websocket-client==1.6.1
 xgboost==1.6.2
-pyyaml
 
- -e .
+-e .
