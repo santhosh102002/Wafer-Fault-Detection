@@ -49,6 +49,4 @@ The project can be deployed using Docker and AWS ECR:
 
 Contributions to the project are welcome! If you'd like to contribute, please follow the guidelines outlined in the CONTRIBUTING.md file.
 
-## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
